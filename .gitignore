@@ -1,0 +1,76 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Dependency and build folders
+/node_modules
+/dist
+/dist-ssr
+/coverage
+node_modules/
+jspm_packages/
+web_modules/
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+.env.development.local
+.env.example
+
+# Vite-specific cache folder
+.vite
+
+# Temporary files and cache
+.cache
+*.tmp
+*.zip
+*.log
+
+# Operating System files
+.DS_Store
+Thumbs.db
+
+# IDE and Editor-specific files
+.vscode/
+!.vscode/extensions.json
+.idea/
+.history
+*.sublime-project
+*.sublime-workspace
+*.swp
+
+# Other directories
+.grunt
+bower_components
+build/Release
+lib-cov
+
+# Other cache and logs
+.npm
+.eslintcache
+.stylelintcache
+.node_repl_history
+.tgz
+.yarn-integrity
+
+# Build and output directories
+.next
+.nuxt
+dist
+.vuepress/dist
+.svelte-kit/
+.vitepress/dist
+
+# Various tool outputs
+.docusaurus
+.serverless/
+.fusebox/
+.dynamodb/
+.firebase/
+.tern-port
