@@ -9,133 +9,134 @@ interface MediaItem {
   type: "png" | "gif" | "mp4" | "glb";
 }
 
-// Массив данных (не экспортируем)
+// ✅ ИСПРАВЛЕНИЕ 1: Убираем слеш в начале путей (media/... вместо /media/...)
+// Это нужно, чтобы корректно склеить путь с BASE_URL
 const MEDIA: MediaItem[] = [
   {
     id: 1,
     title: "Lydia. Electrum One-Third Stater, 12-karat, circa 610–561 BC.",
-    url: "/media/image1.png",
+    url: "media/image1.png",
     type: "png",
   },
   {
     id: 2,
     title: "Athens. Silver Tetradrachm with Owl, circa 450–400 BC.",
-    url: "/media/video1.mp4",
+    url: "media/video1.mp4",
     type: "mp4",
   },
   {
     id: 3,
     title: "Daric, Phase III: Darius II – Artaxerxes II (424–358 BC).",
-    url: "/media/animation1.gif",
+    url: "media/animation1.gif",
     type: "gif",
   },
   {
     id: 4,
     title: "LYDIA. Kroisos. Circa 564/53–550/39 BC. AV Stater.",
-    url: "/media/model1.glb",
+    url: "media/model1.glb",
     type: "glb",
   },
   {
     id: 5,
     title: "Macedonia, Alexander III (the Great), 333–315 BC. AR Tetradrachm.",
-    url: "/media/image2.png",
+    url: "media/image2.png",
     type: "png",
   },
   {
     id: 6,
     title: "Rome. Anonymous. Circa 225–214 BC. AR Quadrigatus.",
-    url: "/media/video2.mp4",
+    url: "media/video2.mp4",
     type: "mp4",
   },
   {
     id: 7,
     title: "China (Ancient). State of Han. Spade Money, 1 Jin, 350–250 BCE.",
-    url: "/media/animation2.gif",
+    url: "media/animation2.gif",
     type: "gif",
   },
   {
     id: 8,
     title: "Rome, Julius Caesar. AR Denarius, military mint, 49–48 BC.",
-    url: "/media/model2.glb",
+    url: "media/model2.glb",
     type: "glb",
   },
   {
     id: 9,
     title:
       "Mysia, Kyzikos. Electrum Hekte, Perseus and Medusa above tunny, circa 450–330 BC.",
-    url: "/media/image3.png",
+    url: "media/image3.png",
     type: "png",
   },
   {
     id: 10,
     title:
       "Lydia, Alyattes II, Electrum Stater, Sardis mint, circa 610–560 BC.",
-    url: "/media/video3.mp4",
+    url: "media/video3.mp4",
     type: "mp4",
   },
   {
     id: 11,
     title:
       "Ionia, Phocaea. Electrum Hekte (1/6 Stater), circa 521–478 BC. Lion devouring prey.",
-    url: "/media/animation3.gif",
+    url: "media/animation3.gif",
     type: "gif",
   },
   {
     id: 12,
     title: "Achaemenid Daric of King Xerxes II, Sardis mint, circa 420–375 BC.",
-    url: "/media/model3.glb",
+    url: "media/model3.glb",
     type: "glb",
   },
   {
     id: 13,
     title:
       "Roman Empire. Augustus (27 BC–14 AD). AV Aureus, Pergamon, circa 19–18 BC",
-    url: "/media/image4.png",
+    url: "media/image4.png",
     type: "png",
   },
   {
     id: 14,
     title: "Achaemenid Empire. AR Siglos, Darius I (circa 520–505 BC)",
-    url: "/media/video4.mp4",
+    url: "media/video4.mp4",
     type: "mp4",
   },
   {
     id: 15,
     title: "Roman Empire. Antoninus Pius. AV Aureus, Rome mint, AD 147",
-    url: "/media/animation4.gif",
+    url: "media/animation4.gif",
     type: "gif",
   },
   {
     id: 16,
     title:
       "Kingdom of Macedonia. AV Gold Stater, Alexander III the Great (circa 334–323 BC).",
-    url: "/media/model4.glb",
+    url: "media/model4.glb",
     type: "glb",
   },
   {
     id: 17,
     title:
       'China (Ancient). State of Chu. Small "Bei" Ant-nose Cash Coin, 400–220 BCE',
-    url: "/media/image5.png",
+    url: "media/image5.png",
     type: "png",
   },
   {
     id: 18,
     title: "Lydia. AV Stater of Croesus, circa 561–546 BC.",
-    url: "/media/video5.mp4",
+    url: "media/video5.mp4",
     type: "mp4",
   },
   {
     id: 19,
     title:
       "Kingdom of Macedonia. AE Chalkon, Kings Philip III & Alexander IV (323–319 BC)",
-    url: "/media/animation5.gif",
+    url: "media/animation5.gif",
     type: "gif",
   },
   {
     id: 20,
     title: "China (Ancient). State of Yan. Ming Knife Money, 401–220 BCE",
-    url: "/media/model5.glb",
+    url: "media/model5.glb",
     type: "glb",
   },
 ];
@@ -147,32 +148,43 @@ export default function MediaViewer() {
   const [index, setIndex] = useState(0);
   const current = MEDIA[index];
 
+  // ✅ ИСПРАВЛЕНИЕ 2: Получаем базовый путь из конфига Vite
+  const baseUrl = import.meta.env.BASE_URL;
+
   // Переключение с зацикливанием
   const next = () => setIndex((i) => (i + 1) % MEDIA.length);
   const prev = () => setIndex((i) => (i - 1 + MEDIA.length) % MEDIA.length);
 
   // Рендер нужного тега в зависимости от типа
   const renderMedia = (item: MediaItem) => {
+    // ✅ ИСПРАВЛЕНИЕ 3: Формируем полный путь к файлу
+    const fullPath = `${baseUrl}${item.url}`;
+
     switch (item.type) {
       case "png":
       case "gif":
         return (
           <img
-            src={item.url}
+            src={fullPath} // используем полный путь
             alt={item.title}
             className="w-full h-full object-contain"
           />
         );
       case "mp4":
         return (
-          <video controls className="w-full h-full object-contain">
-            <source src={item.url} type="video/mp4" />
+          // key={fullPath} нужен, чтобы видео перезагружалось при смене слайда
+          <video
+            key={fullPath}
+            controls
+            className="w-full h-full object-contain"
+          >
+            <source src={fullPath} type="video/mp4" />
             Your browser does not support video
           </video>
         );
       case "glb":
         // 3D‑просмотрщик
-        return <ModelView url={item.url} quality="full" />;
+        return <ModelView url={fullPath} quality="full" />;
       default:
         return null;
     }
