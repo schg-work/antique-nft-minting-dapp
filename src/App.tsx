@@ -1,81 +1,70 @@
-import { useState, useEffect } from "react";
-import MintCard from "./components/MintCard";
-import contractAbi from "./abi/contractAbi.json";
+import { useEffect, useState } from "react";
+import { CONTRACT_CONFIG, type AllowedNetwork } from "./config";
 import type { Abi } from "viem";
 import MyLinks from "./components/MyLinks";
-// MediaViewer (components)
 import MediaViewer from "./components/MediaViewer";
+import MintCard from "./components/MintCard";
 
 function App() {
-  const [currentNetwork, setCurrentNetwork] = useState<string | null>(null);
+  // 🔹 ИЗМЕНЕНИЕ: Дефолтная сеть теперь Optimism
+  const [selectedNetwork, setSelectedNetwork] =
+    useState<AllowedNetwork>("Optimism");
+
+  const [contractAddress, setContractAddress] = useState<`0x${string}` | null>(
+    null,
+  );
+  const [abi, setAbi] = useState<Abi | null>(null);
+  const [requiredChainIdHex, setRequiredChainIdHex] = useState<string | null>(
+    null,
+  );
 
   useEffect(() => {
-    const getNetwork = async () => {
-      if (window.ethereum) {
-        try {
-          const chainId = (await window.ethereum.request({
-            method: "eth_chainId",
-          })) as string;
-          setCurrentNetwork(chainId);
-        } catch (error) {
-          console.error("Failed to get Chain ID:", error);
-        }
-      }
-    };
-    getNetwork();
-
-    // Network change tracking (no change)
-    if (window.ethereum && window.ethereum.on) {
-      const handler = (chainId: string) => setCurrentNetwork(chainId);
-      window.ethereum.on("chainChanged", handler);
-      return () => {
-        if (window.ethereum && window.ethereum.removeListener) {
-          window.ethereum.removeListener("chainChanged", handler);
-        }
-      };
+    // Логика остается прежней, так как CONTRACT_CONFIG уже обновлен в config.ts
+    const config = CONTRACT_CONFIG[selectedNetwork];
+    if (config) {
+      setContractAddress(config.address as `0x${string}`);
+      setAbi(config.abi);
+      setRequiredChainIdHex(config.chainId);
+    } else {
+      setContractAddress(null);
+      setAbi(null);
+      setRequiredChainIdHex(null);
     }
-  }, []);
-
-  // Contract configuration
-  const contractAddress: `0x${string}` =
-    "0xa3295ca72C1525689373f4aD08AFa18C3543D35d";
-  const abi = contractAbi as Abi;
-  const requiredChainIdHex = "0x89";
+  }, [selectedNetwork]);
 
   return (
-    // Main container with centering
     <div className="min-h-screen bg-gray-800 text-white flex flex-col items-center justify-center p-4 sm:p-8 font-sans">
-      {/* Headline */}
       <div className="max-w-4xl mx-auto text-center mb-8">
-        <h1 className="text-4xl sm:text-5xl font-bold mb-4">
-          🪙 Minting house
+        <h1 className="text-3xl sm:text-3xl font-bold mb-4">
+          🪙 From mint to wallet in one safe step — secured with ERC721A
+          technology
         </h1>
+        {/* 🔹 ИЗМЕНЕНИЕ: Обновлен текст описания */}
         <p className="text-lg max-w-xl mx-auto opacity-80">
-          NFT minting interface integrated with MetaMask on Polygon and Arbitrum
+          NFT minting interface integrated with MetaMask on Optimism and
+          Arbitrum
         </p>
       </div>
 
-      {/* MediaViewer */}
       <div className="w-full mb-8">
         <MediaViewer />
       </div>
 
       <div className="p-6 mb-8">
-        <div>
-          <MyLinks />
-        </div>
+        <MyLinks />
       </div>
 
-      {/* MintCard */}
       <div className="w-full flex justify-center">
         <MintCard
           contractAddress={contractAddress}
           abi={abi}
-          currentNetwork={currentNetwork}
+          currentNetwork={null} /* MintCard сам определит MetaMask сеть */
           requiredChainIdHex={requiredChainIdHex}
+          selectedNetwork={selectedNetwork}
+          onNetworkChange={setSelectedNetwork}
         />
       </div>
-      {/* Footer */}
+
       <div className="w-full mt-12">
         <footer className="text-center text-sm text-slate-400 py-4 border-t border-slate-700">
           © 2025 <a className="text-purple-400">SCHG NFT</a>

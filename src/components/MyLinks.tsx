@@ -3,30 +3,20 @@ function MyLinks() {
   return (
     <div className="flex flex-col space-y-8">
       <a
-        href="https://sepolia.etherscan.io/address/0xa3295ca72c1525689373f4ad08afa18c3543d35d#code"
+        href="https://optimistic.etherscan.io/address/0x24b8b90c6050dD066e595027831A863D0906c5A7"
         target="_blank"
         rel="noopener noreferrer"
         className="text-xl mx-auto opacity-80 text-white hover:text-blue-500 underline"
       >
-        View on Etherscan: Contract
+        View on OP Mainnet: Optimism
       </a>
-
       <a
-        href="https://polygonscan.com"
+        href="https://arbiscan.io/address/0x24b8b90c6050dD066e595027831A863D0906c5A7"
         target="_blank"
         rel="noopener noreferrer"
         className="text-xl mx-auto opacity-80 text-white hover:text-blue-500 underline"
       >
-        Link 2: Polygonscan
-      </a>
-
-      <a
-        href="https://arbiscan.io"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="text-xl mx-auto opacity-80 text-white hover:text-blue-500 underline"
-      >
-        Link 3: Arbiscan
+        View on Arbiscan: Arbitrum
       </a>
     </div>
   );

@@ -49,8 +49,7 @@ const MEDIA: MediaItem[] = [
   },
   {
     id: 7,
-    title:
-      "China. Zhou Dynasty. Circa 6th–4th century BC. Bronze Knife and Spade Money.",
+    title: "China (Ancient). State of Han. Spade Money, 1 Jin, 350–250 BCE.",
     url: "/media/animation2.gif",
     type: "gif",
   },
@@ -58,6 +57,85 @@ const MEDIA: MediaItem[] = [
     id: 8,
     title: "Rome, Julius Caesar. AR Denarius, military mint, 49–48 BC.",
     url: "/media/model2.glb",
+    type: "glb",
+  },
+  {
+    id: 9,
+    title:
+      "Mysia, Kyzikos. Electrum Hekte, Perseus and Medusa above tunny, circa 450–330 BC.",
+    url: "/media/image3.png",
+    type: "png",
+  },
+  {
+    id: 10,
+    title:
+      "Lydia, Alyattes II, Electrum Stater, Sardis mint, circa 610–560 BC.",
+    url: "/media/video3.mp4",
+    type: "mp4",
+  },
+  {
+    id: 11,
+    title:
+      "Ionia, Phocaea. Electrum Hekte (1/6 Stater), circa 521–478 BC. Lion devouring prey.",
+    url: "/media/animation3.gif",
+    type: "gif",
+  },
+  {
+    id: 12,
+    title: "Achaemenid Daric of King Xerxes II, Sardis mint, circa 420–375 BC.",
+    url: "/media/model3.glb",
+    type: "glb",
+  },
+  {
+    id: 13,
+    title:
+      "Roman Empire. Augustus (27 BC–14 AD). AV Aureus, Pergamon, circa 19–18 BC",
+    url: "/media/image4.png",
+    type: "png",
+  },
+  {
+    id: 14,
+    title: "Achaemenid Empire. AR Siglos, Darius I (circa 520–505 BC)",
+    url: "/media/video4.mp4",
+    type: "mp4",
+  },
+  {
+    id: 15,
+    title: "Roman Empire. Antoninus Pius. AV Aureus, Rome mint, AD 147",
+    url: "/media/animation4.gif",
+    type: "gif",
+  },
+  {
+    id: 16,
+    title:
+      "Kingdom of Macedonia. AV Gold Stater, Alexander III the Great (circa 334–323 BC).",
+    url: "/media/model4.glb",
+    type: "glb",
+  },
+  {
+    id: 17,
+    title:
+      'China (Ancient). State of Chu. Small "Bei" Ant-nose Cash Coin, 400–220 BCE',
+    url: "/media/image5.png",
+    type: "png",
+  },
+  {
+    id: 18,
+    title: "Lydia. AV Stater of Croesus, circa 561–546 BC.",
+    url: "/media/video5.mp4",
+    type: "mp4",
+  },
+  {
+    id: 19,
+    title:
+      "Kingdom of Macedonia. AE Chalkon, Kings Philip III & Alexander IV (323–319 BC)",
+    url: "/media/animation5.gif",
+    type: "gif",
+  },
+  {
+    id: 20,
+    title: "China (Ancient). State of Yan. Ming Knife Money, 401–220 BCE",
+    url: "/media/model5.glb",
     type: "glb",
   },
 ];
